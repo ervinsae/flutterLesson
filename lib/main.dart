@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:flutter_app/PageCard.dart';
+import 'package:flutter_app/pageLayout.dart';
 import 'wordGen.dart';
 import 'widgetTest.dart';
 import 'signature.dart';
@@ -18,10 +20,22 @@ class MyApp extends StatelessWidget {
       ),
 
       //跳转页面
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-      //home: new RandomWords(),
+
+      //home: PageCard(),
+      //home: PageLayout(),
+      //home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: new RandomWords(),
       //home: new WidgetTest()
       //home: new SignatureTest(),
+
+      /*home: new Scaffold(
+        appBar: new AppBar(
+          title: new Text('Welcome to Flutter'),
+        ),
+        //body: PageCard()
+        //body: MyHomePage(title: 'Flutter Demo Home Page'),
+        body: RandomWords(),
+        ),*/
     );
   }
 }
