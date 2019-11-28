@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
@@ -8,7 +7,6 @@ class RandomWords extends StatefulWidget {
 }
 
 class RandomWordsState extends State<RandomWords> {
-
   final _suggestions = <WordPair>[];
 
   //收藏的单词
@@ -21,10 +19,9 @@ class RandomWordsState extends State<RandomWords> {
     /*final wordPair = new WordPair.random();
     return new Text(wordPair.asPascalCase);*/
 
-    return new Scaffold (
+    return new Scaffold(
       appBar: new AppBar(
         title: new Text('Startup Name Generator'),
-
         actions: <Widget>[
           new IconButton(icon: new Icon(Icons.list), onPressed: _pushSaved),
         ],
@@ -32,7 +29,6 @@ class RandomWordsState extends State<RandomWords> {
       body: _buildSuggestions(),
     );
   }
-
 
   Widget _buildSuggestions() {
     return new ListView.builder(
@@ -48,30 +44,29 @@ class RandomWordsState extends State<RandomWords> {
           // 语法 "i ~/ 2" 表示i除以2，但返回值是整形（向下取整），比如i为：1, 2, 3, 4, 5
           // 时，结果为0, 1, 1, 2, 2， 这可以计算出ListView中减去分隔线后的实际单词对数量
           final index = i ~/ 2;
-          // 如果是建议列表中最后一个单词对
+          // 如果是建议列表中最后一个单词对(第一次length为0)
+          print("size:$_suggestions.length");
+          print("index:$index");
           if (index >= _suggestions.length) {
             // ...接着再生成10个单词对，然后添加到建议列表
+            print("拉到最下面了");
             _suggestions.addAll(generateWordPairs().take(10));
           }
           return _buildRow(_suggestions[index]);
-        }
-    );
+        });
   }
 
   Widget _buildRow(WordPair pair) {
-
     final alreadySaved = _saved.contains(pair);
     return new ListTile(
       title: new Text(
         pair.asPascalCase,
         style: _biggerFont,
       ),
-
       trailing: new Icon(
         alreadySaved ? Icons.favorite : Icons.favorite_border,
         color: alreadySaved ? Colors.red : null,
       ),
-
       onTap: () {
         setState(() {
           if (alreadySaved) {
@@ -81,31 +76,39 @@ class RandomWordsState extends State<RandomWords> {
           }
         });
       },
-
     );
   }
-
 
   void _pushSaved() {
     Navigator.of(context).push(
       new MaterialPageRoute(
         builder: (context) {
           final tiles = _saved.map(
-                (pair) {
-              return new ListTile(
-                title: new Text(
-                  pair.asPascalCase,
-                  style: _biggerFont,
+            (pair) {
+              return new Container(
+                padding: const EdgeInsets.all(12),
+                //decoration: new BoxDecoration(color: Colors.blue[500]),
+                child: new ListTile(
+                  title: new Text(
+                    pair.asPascalCase,
+                    style: _biggerFont,
+                  ),
+                  /*trailing: new Icon(
+                    Icons.print,
+                    color: Colors.red,
+                  ),*/
+                  /*leading: new Icon(
+                    Icons.contact_phone,
+                    color: Colors.blue[500],
+                  ),*/
                 ),
               );
             },
           );
-          final divided = ListTile
-              .divideTiles(
+          final divided = ListTile.divideTiles(
             context: context,
             tiles: tiles,
-          )
-              .toList();
+          ).toList();
 
           return new Scaffold(
             appBar: new AppBar(
@@ -113,7 +116,6 @@ class RandomWordsState extends State<RandomWords> {
             ),
             body: new ListView(children: divided),
           );
-
         },
       ),
     );

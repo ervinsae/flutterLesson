@@ -1,12 +1,17 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:flutter_app/GestureTest.dart';
 import 'package:flutter_app/PageCard.dart';
 import 'package:flutter_app/pageLayout.dart';
+import 'package:flutter_app/shopping.dart';
 import 'wordGen.dart';
 import 'widgetTest.dart';
 import 'signature.dart';
 
 void main() => runApp(MyApp());
+bool isSelect = false;
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -16,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.red, //只能有三原色：red,yellow,blue
-        //primaryColor: Colors.black
+        primaryColor: Colors.black
       ),
 
       //跳转页面
@@ -24,10 +29,23 @@ class MyApp extends StatelessWidget {
       //home: PageCard(),
       //home: PageLayout(),
       //home: MyHomePage(title: 'Flutter Demo Home Page'),
-      home: new RandomWords(),
+      //home: new RandomWords(),
       //home: new WidgetTest()
       //home: new SignatureTest(),
+      //home: GestureTest(),
+      /*home: new ShoppingListItem(
+        product: Product(name: 'banana'),inCart: isSelect,onCartChanged: onCartChanged
+      ),*/
 
+      home: new ShoppingList(
+        products: <Product>[
+          new Product(name: 'Eggs'),
+          new Product(name: 'Flour'),
+          new Product(name: 'Chocolate chips'),
+          new Product(name: 'Apple'),
+          new Product(name: 'Banana'),
+        ],
+      ),
       /*home: new Scaffold(
         appBar: new AppBar(
           title: new Text('Welcome to Flutter'),
