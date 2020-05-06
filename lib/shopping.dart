@@ -36,17 +36,33 @@ class ShoppingListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Card(
-        elevation: 5,
-        child: new ListTile(
-          onTap: () {
-            onCartChanged(product, !inCart); //取反
-          },
-          leading: new CircleAvatar(
-            backgroundColor: _getColor(context),
-            child: new Text(product.name[0].toUpperCase()), //显示第一个字母
+      elevation: 5,
+      child: new ListTile(
+        isThreeLine: false,
+        onTap: () {
+          onCartChanged(product, !inCart); //取反
+        },
+        leading: new CircleAvatar(
+          backgroundColor: _getColor(context),
+          child: new Text(product.name[0].toUpperCase()), //显示第一个字母
+        ),
+        contentPadding: EdgeInsets.only(left: 15.0),
+        title: new Text(product.name, style: _getTextStyle(context)),
+        subtitle: new Column(children: [
+          new Text(
+            product.name[1].toUpperCase(),
+            style: new TextStyle(
+              color: Colors.red[500],
+              fontSize: 16,
+            ),
           ),
-          title: new Text(product.name, style: _getTextStyle(context)),
-        ));
+          new Text(
+            "A",
+            style: new TextStyle(color: Colors.black, fontSize: 14),
+          )
+        ]),
+      ),
+    );
   }
 }
 
